@@ -120,3 +120,21 @@ def is_connected(network):
         True - the graph is connected
         False - the graph is not connected
     '''
+
+    if not network:
+        return True
+
+    start = list(network.keys())[0]
+    visited = [start]
+    queue = [start]
+
+    while queue:
+        current = queue.pop(0)
+
+        for neighbor in network[current]:
+            if neighbor in network[current]:
+                if neighbor not in visited:
+                    visited.append(neighbor)
+                    queue.append(neighbor)
+
+    return len(visited) == len(network)
