@@ -64,6 +64,24 @@ def path(network, source, dest):
     destination.
     '''
 
+    queue = [[source]]
+    visited = [source]
+
+    while queue:
+        current_path = queue.pop(0)
+        current_node = current_path[-1]
+
+        if current_node == dest:
+            return current_path
+
+        for neighbor in network[current_node]:
+            if neighbor not in visited:
+                visited.append(neighbor)
+                new_path = current_path + [neighbor]
+                queue.append(new_path)
+
+    return []
+
 def node_query(network, source, dist):
    
     if dist == 0:
